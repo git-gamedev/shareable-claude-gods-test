@@ -1,4 +1,4 @@
-// Adaptive engine: running percentage map per god; question tier (broad > mid > narrow) and question choice depend on the map.
+\// Adaptive engine: running percentage map per god; question tier (broad > mid > narrow) and question choice depend on the map.
 const CL={mk:"he ar ac at ch ap",so:"hm ir nk er mo hs",wi:"pn ty nr ar nk hm ir",ni:"ny hy mp tn nm mo ch"};
 function parse(sp){const w={};sp.split(" ").forEach(p=>{if(!p)return;if(p[0]=="@")CL[p.slice(1,3)].split(" ").forEach(g=>w[g]=(w[g]||0)+ +p[3]);else w[p.slice(0,2)]=(w[p.slice(0,2)]||0)+ +p[2]})
 return w}
@@ -18,8 +18,8 @@ function rel(q,top,st){let r=0;top.forEach(g=>{const ws=q.o.map(o=>o.w[g]||0);r+
 function pick(st,opts,top){const sc=opts.map(o=>({o,s:top.reduce((a,g)=>a+(o.w[g]||0),0)+st.rng()*0.01})).sort((a,b)=>b.s-a.s);
 return shuffle(sc.slice(0,3).map(x=>x.o).concat(shuffle(sc.slice(3).map(x=>x.o),st.rng).slice(0,2)),st.rng)}
 function buildN(st,k,r){const gs=r.slice(k.off,k.off+6),f=k.f[0],i=k.f[1];let t,fn;
-if(f=="s"){t="Which of these strengths feels most like yours?";fn=g=>G[g][3][i]}
-else if(f=="f"){t="Which flaw do you recognize in yourself?";fn=g=>G[g][4].split(". ")[0].replace(/\.$/,"")+"."}
+if(f=="s"){t="Which of these strengths feels most like yours?";fn=g=>NP[g][i]}
+else if(f=="f"){t="Which flaw do you recognize in yourself?";fn=g=>NP[g][3]}
 else if(f=="g"){t="Which of these sounds most like you?";fn=g=>G[g][5].replace(/^./,c=>c.toUpperCase())}
 else{t="Which title would you rather hold?";fn=g=>G[g][1]}
 return{id:k.id,t,opts:pick(st,gs.map(g=>({text:fn(g),w:{[g]:2.5}})),r.slice(0,5))}}
@@ -41,8 +41,8 @@ function vec(tk){const v={},add=k=>{const b=h32(k)%4096;v[b]=(v[b]||0)+1};tk.for
 function cos(a,b){let d=0,x=0,y=0;for(const k in a){x+=a[k]*a[k];if(b[k])d+=a[k]*b[k]}for(const k in b)y+=b[k]*b[k];return x&&y?d/Math.sqrt(x*y):0}
 function simhash(tk){const c=new Array(32).fill(0);tk.forEach(w=>{const h=h32(w);for(let i=0;i<32;i++)c[i]+=(h>>>i&1)?1:-1});let f=0;c.forEach((v,i)=>{if(v>0)f|=1<<i});return f>>>0}
 const pop=x=>{let n=0;while(x){n+=x&1;x>>>=1}return n};
-function gradeFR(text){const tk=toks(text),v=vec(tk),fp=simhash(tk),sim={};
-for(const g in FR){const rt=toks(FR[g]);sim[g]=0.8*cos(v,vec(rt))+0.2*Math.max(0,(1-pop((fp^simhash(rt))>>>0)/32-0.5)*2)}
+function gradeFR(text,tbl){tbl=tbl||FR;const tk=toks(text),v=vec(tk),fp=simhash(tk),sim={};
+for(const g in tbl){let m=0;[].concat(tbl[g]).forEach(r=>{const rt=toks(r);m=Math.max(m,0.8*cos(v,vec(rt))+0.2*Math.max(0,(1-pop((fp^simhash(rt))>>>0)/32-0.5)*2))});sim[g]=m}
 return{fp:fp.toString(16).padStart(8,"0"),n:tk.length,sim}}
-function applyFR(st,res){if(res.n<3)return;for(const g in res.sim)st.S[g]+=10*res.sim[g]}
+function applyFR(st,res,k){if(res.n<3)return;for(const g in res.sim)st.S[g]+=(k||10)*res.sim[g]}
 function result(st){const pm=pmap(st);return rank(st).map(g=>[g,pm[g]])}
