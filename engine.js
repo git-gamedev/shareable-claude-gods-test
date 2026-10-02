@@ -1,12 +1,15 @@
-\// Adaptive engine: running percentage map per god; question tier (broad > mid > narrow) and question choice depend on the map.
+// Adaptive engine: running percentage map per god; question tier (broad > mid > narrow) and question choice depend on the map.
 const CL={mk:"he ar ac at ch ap",so:"hm ir nk er mo hs",wi:"pn ty nr ar nk hm ir",ni:"ny hy mp tn nm mo ch"};
 function parse(sp){const w={};sp.split(" ").forEach(p=>{if(!p)return;if(p[0]=="@")CL[p.slice(1,3)].split(" ").forEach(g=>w[g]=(w[g]||0)+ +p[3]);else w[p.slice(0,2)]=(w[p.slice(0,2)]||0)+ +p[2]})
 return w}
 const POOL=[];
 RAW_B.forEach((q,i)=>POOL.push({id:"B"+(i+1),tier:"B",t:q[0],o:q[1].map(o=>({text:o[0],w:parse(o[1])}))}));
 RAW_M.forEach((q,i)=>POOL.push({id:"M"+(i+1),tier:"M",t:q[0],o:q[1].map(o=>({text:o[0],w:parse(o[1])}))}));
+// Balance: scale each god's option weights so every god has equal total mass in the handwritten pool (stops over-represented gods winning random input).
+{const m={};POOL.forEach(q=>q.o.forEach(o=>{for(const g in o.w)m[g]=(m[g]||0)+o.w[g]}));const avg=Object.values(m).reduce((a,b)=>a+b,0)/Object.keys(m).length;
+POOL.forEach(q=>q.o.forEach(o=>{for(const g in o.w)o.w[g]*=avg/m[g]}))}
 // Narrow questions are generated live from the leading gods' own strengths, flaws, tags and titles.
-const FAM=[["s",0],["s",1],["s",2],["f"],["g"],["t"]],NAR=[];
+const FAM=[["s",0],["s",1],["s",2],["f"]],NAR=[];
 [0,2].forEach(off=>FAM.forEach(f=>NAR.push({id:"N"+f.join("")+off,f,off})));
 function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function shuffle(a,r){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
