@@ -70,3 +70,72 @@ ch:"I wait and measure the hours, patient because time wears down every wall, an
 ny:"I wait for dark, move unseen through the shadows, and slip past in silence while no one is watching",
 ar:"I gather what the land offers, share bread and honey, work slowly and practically with simple tools to clear the road"
 };
+// --- v4 additions ---
+RAW_M.push(
+["Your ideal weekend project:",[["Restoring something broken","he2 ac1"],["Planning a route nobody's taken","at1 hm2"],["Hosting a feast","hs2 ir1"],["A long hike with no map","pn2 nr1"],["Writing a story","mp2 ap1"],["Training for a race","nk2 ch1"]]],
+["A rival beats you fairly. You:",[["Study what they did","at2 nk1"],["Congratulate them, then plot","nk1 er2"],["Shrug, luck happens","ty2 hy1"],["Note it and wait","nm1 ch2"],["Roast yourself publicly","mo2 hm1"],["Practice until it's different","he1 nk2"]]],
+["A stranger asks for directions. You:",[["Walk them there","ir2 hs1"],["Give a shortcut that may be shady","hm2 er1"],["Draw a map","he1 at2"],["Admit you're lost too","nr2 mo1"],["Wave vaguely at the horizon","pn2 hy1"],["Ask where they truly want to go","ap1 mp2"]]],
+["In a group project you are the one who:",[["Does the hard part quietly","ar2 he1"],["Keeps everyone calm","hs2 hy1"],["Spots the flaw","mo2 at1"],["Rallies the deadline push","nk2 ap1"],["Brings the odd idea","mp2 er1"],["Chases late people politely","ir2 nm1"]]],
+["What would you hate to lose?",[["My tools","he2 ar1"],["My name","ap2 nk1"],["My routine","ch2 hs1"],["My freedom","pn2 ty1"],["My memories","mp1 tn2"],["My good sleep","hy2 ny1"]]],
+["A rumor spreads about you. You:",[["Correct it with facts","nm1 at2"],["Make a joke of it","mo2 hm1"],["Let it die on its own","hy2 ch1"],["Trace who started it","nm2 ny1"],["Make it bigger","er2 hm1"],["Stay calm and carry on","tn2 hs1"]]],
+["Pick a season:",[["Autumn harvest","ar2 ch1"],["Spring thaw","ac1 pn2"],["Summer festival","ap1 nk2"],["Deep winter","tn1 ny2"],["Storm season","er2 ty1"],["The turn between seasons","ch2 ir1"]]],
+["Choose a tool:",[["Hammer","he2 nk1"],["Compass","nr1 at2"],["Lantern","ny1 ac2"],["Lyre","ap2 pn1"],["Dice","ty2 hm1"],["Quill","ir1 mo2"]]],
+["Someone is crying near you. You:",[["Sit beside them","hs2 tn1"],["Bring tea and bandages","ac2 ar1"],["Say something unexpectedly funny","hm1 mo2"],["Wait until they're ready to talk","tn2 ny1"],["Tell them it will pass","ch1 hy2"],["Get them walking it off","nk2 pn1"]]],
+["Your relationship with rules:",[["I rebuild them to work better","he1 at2"],["I follow them to the letter","nm2 ch1"],["I bend them","hm2 ty1"],["I test them to breaking","er2 mo1"],["I ignore them kindly","pn2 hy1"],["I keep them for others' sake","ir2 hs1"]]],
+["A strange door appears in your house. You:",[["Study the lock","he1 at2"],["Open it immediately","pn1 ty2"],["Knock and wait","nr1 tn2"],["Imagine what's behind it","mp2 ny1"],["Ask someone else first","ir2 hs1"],["Take notes and measure","ch2 ar1"]]],
+["How do you apologize?",[["Fix the thing I broke","he2 ac1"],["Pay in full","nm2 nk1"],["Say it plainly","nr2 mo1"],["Slip in a gift and a smile","hm2 ap1"],["Cook for them","hs2 ar1"],["Wait until the sting passes","hy1 ch2"]]],
+["Which sound do you love?",[["A forge hammering","he2 nk1"],["Waves at night","nr1 ny2"],["Wind in the pipes","pn2 ap1"],["A crackling fire","hs2 tn1"],["A crowd roaring","nk2 er1"],["Rain on the roof","hy2 mp1"]]],
+["A deal seems too good. You:",[["Read the fine print","at2 nm1"],["Take it, why not","ty2 pn1"],["Haggle harder","hm2 er1"],["Ask who loses","nm2 ac1"],["Wait a month","ch2 hy1"],["Pass, it feels wrong","tn1 ny2"]]],
+["What do you want to leave behind?",[["Something built","he2 ar1"],["A student","ar1 ap2"],["A healed person","ac2 hs1"],["A joke people retell","mo2 hm1"],["An unsettling question","er1 nr2"],["A quiet place","hy1 tn2"]]]
+);
+// Paraphrased first-person trait statements for the narrow tier (3 strengths + 1 flaw per god), so no god's literal text is shown.
+const NP={
+he:["I'd rather build it than talk about it","I can stay with a stubborn problem for days","Rough sketches become working things in my hands","I keep redoing it until it's right, even after it's good enough"],
+at:["I see the shape of a situation before others do","I notice the pattern under the noise","I stay level when everyone else rattles","I trust my plan too much and it eats my time"],
+ap:["I do beautiful things with discipline","People ask me where things are heading","My presence tends to steady and mend people","I bristle when my brilliance is doubted"],
+hm:["I adapt faster than the situation changes","I'm the one who introduces people to each other","I can always find the shortcut","I can't sit still and I shade the truth to keep moving"],
+hs:["People relax when I'm in the room","I make a place feel safe","I keep the peace when it's tense","I avoid conflict until it grows on its own"],
+nm:["I can't ignore it when something is unfair","I see through anyone puffed up with pride","I hold the line when others look away","I keep old scores open much too long"],
+mo:["I say the flaw out loud when no one else will","Humor is how I make my point","Authority doesn't scare me","My candor has cost me a place at the table"],
+hy:["My calm is contagious","I know when it's time to power down","I influence people without raising my voice","When things get hard I go quiet and check out"],
+mp:["My imagination is vivid and strange","I read people very deeply","I can make an abstract idea feel real","I'd often rather be in my head than in the day"],
+tn:["I can say hard truths without flinching","I'm at ease with things ending","People lean on me when everything feels heavy","I go cold to keep from being overwhelmed"],
+ty:["I jump when an opening appears","Uncertainty doesn't bother me","I bounce back when things go wrong","I count on things working out until they don't"],
+nr:["I'm honest in a way that goes deep","I often sense what's coming","I fit myself to any circumstance","I slip away the moment someone presses me"],
+pn:["I trust my gut first","I find real joy in the passing moment","I feel most myself in open country with music","I chase the wild thing before looking where it goes"],
+ir:["I'm the link between people who can't reach each other","I can deliver bad news gently","People rely on me to show up","I carry everyone's words and misplace my own"],
+nk:["I'm relentless once I commit","I finish things strongly","I get a team believing it can win","I can't enjoy rest while a win is still out there"],
+ac:["I'm drawn to repair what's damaged","I pair kindness with real skill","I don't give up on people others have written off","I'll break the rules for someone I can't let go of"],
+er:["I'm the spark that gets stagnant things moving","Conflict doesn't scare me","I disrupt things creatively","I stir things up for the thrill and then watch it spill"],
+ch:["I'm patient on a long horizon","My timing is usually right","I can tell what will last","I feel every wasted hour"],
+ny:["I have a depth people sense right away","I have a quiet authority","I'm comfortable with what's unseen","I retreat into the dark and call it mystery"],
+ar:["I'm good with practical, useful skills","I love teaching what I know","I can keep at slow, steady work","I quietly resent it when the work goes unthanked"]
+};
+// Second free-response prompt, one reference per god. Graders take the best score across references.
+const FRPROMPT2="Someone you trusted lied to you, and it cost you something real. In a few sentences, say what you do next and why.";
+const FR2={
+he:"I fix the damage with my own hands, rebuild what was broken, and put it back sturdier than before",
+at:"I work out why they lied, plan my next move carefully, and make sure it cannot happen again",
+ap:"I tell them plainly what I see, forgive when they heal, and move on with my head high and my pride intact",
+hm:"I use a clever trick to turn the lie around, talk my way out, and get the loss back with a smile",
+hs:"I keep the peace, forgive quietly, and keep the home warm so everyone can stay together",
+nm:"I keep a careful account of what I am owed, and make sure they pay back exactly what they cost me",
+mo:"I mock them openly, laugh at the lie, and say out loud how transparent and ridiculous it was",
+hy:"I sleep on it, let it fade, and let tomorrow's rest soften the anger until it does not matter",
+mp:"I replay it in my mind like a dream, picture their reasons, and imagine another way it could have gone",
+tn:"I accept that trust has ended, stay quiet and calm, and let the friendship die peacefully without cruelty",
+ty:"I shrug it off as bad luck, take a chance on someone new, and bet that fortune turns",
+nr:"I ask for the honest truth, hold them until they answer, and then adapt to what I learn",
+pn:"I walk out into the wild hills, play music, shout it out, and let the anger run free",
+ir:"I carry my message to both of us, talk it through kindly, and rebuild the bridge between us",
+nk:"I refuse to be beaten, pour the hurt into effort, and win back more than I lost",
+ac:"I tend my own wound, care for the others hurt, and forgive because I will not give up on people",
+er:"I stir up trouble, call them out publicly, and watch the argument break everything open",
+ch:"I wait patiently, let time reveal the truth, and act only at exactly the right moment",
+ny:"I withdraw into the dark, say nothing, and quietly decide in silence what comes next",
+ar:"I go back to my work, keep helping others anyway, and resent that nobody thanked me"
+};
+// Extra references (v5): alternate phrasings in plain voice, merged into FR / FR2 as arrays.
+const XR1={he:"I look at the rubble like a problem to build my way out of, and start making tools",at:"First I think, then I choose the smartest plan and direct the others",ap:"I stay clear-headed, sing to keep spirits up, and see what to do next",hm:"I find a way around fast, talk to whoever I need, and keep moving",hs:"I make everyone comfortable and calm, and we wait together until it is safe",nm:"Somebody is responsible and it is only fair they make it right",mo:"The road was badly made and I will say so, loudly and with a joke",hy:"I lie down and sleep, because tired people choose badly",mp:"I close my eyes and imagine another road, and the way opens in my mind",tn:"Some things end, and I sit with that calmly instead of fighting it",ty:"I trust luck and take the first lucky opening that shows up",nr:"I tell everyone the honest truth about the odds and adapt as it changes",pn:"I go by feel, wander off into the hills, and enjoy the walk",ir:"I get word to the people on the other side and connect everyone",nk:"I will not quit, I push until we have won",ac:"I check who is hurt first and care for them before anything else",er:"I shake things up with a fight and see what breaks loose",ch:"I am patient, because the rocks will wear down in time",ny:"I wait for night and slip by in the dark without being seen",ar:"I work with simple tools, share food, and take it slow and steady"};
+const XR2={he:"I do not argue, I repair what I can, and rebuild trust and things by hand",at:"I think through the lie and plan the best response before acting",ap:"I speak plainly and clearly, then heal and move forward with grace",hm:"I turn it around, get the truth out of them, and use what I learned",hs:"I keep peace, forgive quietly, and hold things together at home",nm:"They owe me and I will make sure it is repaid, it is only fair",mo:"I call it out, mock the excuse, and say the blunt truth out loud",hy:"I sleep on it and let the anger fade",mp:"I replay it in my head and imagine how it could have gone",tn:"I accept that this trust is over, calmly and without drama",ty:"I shrug, take the chance on someone new, and trust fortune",nr:"I confront them honestly and say what I see, then change course",pn:"I go out walking in the wild, play music, and shake it off",ir:"I carry the message to everyone it concerns and reconnect people",nk:"I get back up, throw myself into work, and win anyway",ac:"I help those hurt by it, including myself, and mend what I can",er:"I make a scene, stir the whole crowd up, and make them squirm",ch:"I wait, and let time show what is true",ny:"I withdraw into the quiet dark and say nothing, but I do not forget",ar:"I go back to my work, teach others what I learned, and carry on steadily"};
+for(const g in XR1){FR[g]=[].concat(FR[g],XR1[g]);FR2[g]=[].concat(FR2[g],XR2[g])}
