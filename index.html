@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Which Greek God Are You? (Deep Cuts Edition)</title>
-<meta name="description" content="A 24-question quiz that places you among 20 Greek gods, mostly the lesser-known ones.">
+<meta name="description" content="A branching quiz that places you among 20 Greek gods, mostly the lesser-known ones.">
 <meta property="og:title" content="Which Greek God Are You? (Deep Cuts Edition)">
-<meta property="og:description" content="24 questions. 20 gods. Hephaestus, Momus, Nemesis, Nyx, and more.">
+<meta property="og:description" content="Branching paths. 20 gods. Hephaestus, Momus, Nemesis, Nyx, and more.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏺</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,44 +68,71 @@ ch:["Chronos","God of Time","The personification of time itself. He does not rus
 ny:["Nyx","Goddess of Night","Primordial and feared even by Zeus. Mother of Sleep, Death, Dreams, Strife, and Nemesis. She is the dark where everything starts.",["Depth","Quiet authority","Mastery of what's unseen"],"Hiding in the dark. Mystery can become isolation.","a depth of shadow"],
 ar:["Aristaeus","God of Beekeeping and Rural Crafts","He taught people to keep bees, make cheese, and grow olives. Practical, quiet, and generous with knowledge, but history forgot to thank him.",["Practical skill","Teaching others","Patience with slow, steady work"],"Resentment when the work goes unthanked.","a gardener's patience"]
 };
-// each option: [text, {godId: points}]
-const Q=[
-["It's a free Saturday with zero plans. You:",[["Fix or build something",{he:2,ar:1}],["Wander somewhere random",{pn:2,hm:1}],["Sleep in, then a slow cozy day",{hy:2,hs:1}],["Stay up late with the stars and your thoughts",{ny:2,mp:1}]]],
-["The group project is falling apart. You:",[["Rebuild the plan from the weakest point",{at:2,ch:1}],["Fix the broken piece by hand",{he:2,ac:1}],["Make sure slackers face consequences",{nm:2,nk:1}],["Point out the absurdity and stir things up",{mo:2,er:1}]]],
-["What would you most want to be known for?",[["Healing people others gave up on",{ac:2,hs:1}],["Winning when it counted",{nk:2,ap:1}],["Being the bridge between people",{ir:2,hm:1}],["Making something people study for years",{ap:2,he:1}]]],
-["When do you feel most alive?",[["Right after a storm clears",{ir:2,nr:1}],["Midday: loud, busy, in motion",{hm:2,nk:1}],["Dusk, between one thing and the next",{ch:2,ny:1}],["Late at night, everything quiet",{hy:2,mp:1}]]],
-["Your honest weak spot:",[["Perfectionism. Never done",{he:2,at:1}],["I hold grudges",{nm:2,er:1}],["I say the blunt thing out loud",{mo:2,ny:1}],["I leave too much to chance",{ty:2,pn:1}]]],
-["Friends come to you for:",[["Brutally honest feedback",{mo:2,ny:1}],["A solid plan",{at:2,ch:1}],["Comfort and care",{hs:2,ac:1}],["A pep talk to go win",{nk:2,ap:1}]]],
-["Pick a power:",[["Knowing how things turn out",{nr:2,ap:1}],["Delivering any message anywhere",{ir:2,hm:1}],["Controlling time",{ch:2,tn:1}],["Always landing lucky",{ty:2,pn:1}]]],
-["Your ideal place:",[["A workshop full of tools",{he:2,ar:1}],["An open hillside",{pn:2,ar:1}],["A calm room where nothing is rushed",{tn:2,hy:1}],["The sea shore",{nr:2,ir:1}]]],
-["Someone wrongs you. You:",[["Keep a quiet ledger until it balances",{nm:2,tn:1}],["Outthink them and plan",{at:2,ch:1}],["Sleep on it",{hy:2,mp:1}],["Turn it into a joke or a story",{hm:2,mo:1}]]],
-["Pick a motto:",[["Make it well.",{he:2,ac:1}],["All things end gently.",{tn:2,hy:1}],["Tend the fire.",{hs:2,ar:1}],["Fortune favors the bold.",{ty:2,nk:1}]]],
-["Your role in the group chat:",[["Meme-slinger who roasts everyone",{mo:2,er:1}],["Organizer with the plan",{at:2,ch:1}],["The one who checks in on people",{hs:2,ac:1}],["The quiet lurker who sees everything",{ny:2,ch:1}]]],
-["A stranger asks for directions. You:",[["Give the shortcut",{hm:2,pn:1}],["Walk them there",{hs:2,ir:1}],["Draw a precise map",{he:2,at:1}],["Point them to where they actually need to go",{nr:2,ap:1}]]],
-["Which sound do you love most?",[["Pipes on a windy hill",{pn:2,ap:1}],["A hammer on an anvil",{he:2,ar:1}],["Rain at night",{hy:2,mp:1}],["Waves rolling in",{nr:2,ir:1}]]],
-["A rule seems unfair. You:",[["Follow it while quietly working around it",{hm:2,ny:1}],["Challenge it publicly",{mo:2,er:1}],["Propose a better rule",{at:2,nm:1}],["Ignore it and see what happens",{ty:2,pn:1}]]],
-["Pick a season:",[["Early spring thaw",{ir:2,ar:1}],["Autumn harvest, everyone at the table",{ar:2,hs:1}],["Deep winter night",{ny:2,hy:1}],["Summer games and competition",{nk:2,ap:1}]]],
-["Your workspace looks like:",[["Tools and half-finished projects",{he:2,pn:1}],["Immaculate and labeled",{at:2,ch:1}],["A cozy corner with a blanket",{hs:2,hy:1}],["Plants, herbs, and jars of things",{ar:2,ac:1}]]],
-["A big gamble shows up. You:",[["Take it",{ty:2,nk:1}],["Calculate the odds",{at:2,ch:1}],["Go with your gut or an omen",{nr:2,ap:1}],["Pass and keep things steady",{hs:2,tn:1}]]],
-["Which would bother you most?",[["Wasting time",{ch:2,nk:1}],["Watching someone get away with it",{nm:2,nk:1}],["Being shut out of the room where it's decided",{mo:2,ny:1}],["Being stuck in one place",{hm:2,pn:1}]]],
-["Something precious breaks. You:",[["Repair it better than before",{he:2,ac:1}],["Mourn it properly, then move on",{tn:2,hs:1}],["Sleep on it and deal tomorrow",{hy:2,mp:1}],["Laugh. Nothing lasts anyway",{mo:2,ty:1}]]],
-["Your last words:",[["\"Finally, the truth.\"",{nr:2,mo:1}],["\"Everything was balanced.\"",{nm:2,tn:1}],["\"It was beautiful.\"",{ap:2,ir:1}],["\"Keep the fire lit.\"",{hs:2,hy:1}]]],
-["At a party, you're:",[["The host, keeping glasses full",{hs:2,ar:1}],["Starting a debate on purpose",{er:2,mo:1}],["On the dance floor",{pn:2,nk:1}],["In a corner telling strange stories",{mp:2,ny:1}]]],
-["How do you handle a deadline?",[["Done early and calm",{ch:2,at:1}],["Last-minute adrenaline",{nk:2,hm:1}],["Chaos is half the fun",{er:2,ty:1}],["Steady slow craft until it's right",{he:2,ar:1}]]],
-["Someone near you is hurt. You:",[["Patch them up",{ac:2,hs:1}],["Sit beside them until it passes",{tn:2,hy:1}],["Find out who did it",{nm:2,nk:1}],["Lighten the mood",{hm:2,mo:1}]]],
-["Pick a creature:",[["A bee, working for the hive",{ar:2,hs:1}],["A hawk, watching from above",{ap:2,nr:1}],["A raven in the night",{ny:2,tn:1}],["A butterfly, between worlds",{ir:2,mp:1}]]]
-];
-const app=document.getElementById("app");let i=0,s={};
-function start(){i=0;s={};
-app.innerHTML='<h1>Which God Are You?</h1><p class="c t" style="margin-top:0">Deep Cuts Edition</p><p class="c mut">'+Q.length+' questions. '+Object.keys(G).length+' gods. Mostly the ones the big names overshadow: Momus, Nemesis, Nyx, Aristaeus, and more.</p><button class="go" id="b">Begin</button>';
-document.getElementById("b").onclick=ask}
-function ask(){const q=Q[i];
-app.innerHTML='<div class="bar"><i style="width:'+(i/Q.length*100)+'%"></i></div><p class="mut">Question '+(i+1)+' of '+Q.length+'</p><h2>'+q[0]+'</h2>';
-q[1].forEach(o=>{const b=document.createElement("button");b.textContent=o[0];
-b.onclick=()=>{for(const k in o[1])s[k]=(s[k]||0)+o[1][k];++i<Q.length?ask():done()};app.appendChild(b)})}
+// Branching question graph. n(id, defaultNext, text, [[option, "godId+points ...", optionalNextId], ...])
+const N={};const n=(id,nx,t,o)=>{N[id]={t,o,nx}};
+n("R","","A door appears that wasn't there before. You open it and find:",[
+["A torchlit hall full of voices and music","","A1","Hall"],["A quiet room of tools, books, and unfinished work","","B1","Workshop"],["Open country under a wide sky","","C1","Wilds"],["A dim, still space lit by something far away","","D1","Night"]]);
+// Path A: the Hall
+n("A1","A2","Every head in the hall turns to you. You:",[["Tell a story that lands","hm2 ap1"],["Poke fun at the host","mo2 er1"],["Make sure everyone has a seat and a plate","hs2 ir1"],["Challenge someone to a contest","nk2 er1"],["Slip out the side door","hm1 ny2"]]);
+n("A2","A3","Two guests are fighting over something small. You:",[["Fan the flames, just a little","er2 mo1"],["Settle it fairly","nm2 ir1"],["Carry messages between them until they calm down","ir2 hm1"],["Bet on who wins","ty2 nk1"],["Pour them both a drink and change the subject","hs2 ap1"]]);
+n("A3","","A stranger offers a deal that sounds too good. You:",[["Take it. Fortune loves the bold","ty2 nk1","A4a"],["Read every word twice","nm1 mo1","A4b"],["Ask what they really want","ir1 hm2","A4b"],["Counter with a better offer","hm2 ap1","A4a"],["Walk away","hs2 nm1","A4b"]]);
+n("A4a","A5","You win, and the crowd chants. You:",[["Soak it in","nk2 ap1"],["Share the credit loudly","ir2 hs1"],["Look for the next challenge","nk1 er2"],["Give a speech nobody asked for","ap2 mo1"],["Feel uneasy and step back","ny1 hs1"]]);
+n("A4b","A5","Something about the hall feels off. You:",[["Investigate quietly","hm1 ny2"],["Say it out loud","mo2 nm1"],["Warn the people you trust","ir2 hs1"],["Test it with a small provocation","er2 hm1"],["Leave a note and go","ir1 hm2"]]);
+n("A5","A6","The morning after, what matters most?",[["Everyone got home safe","hs2 ir1"],["The story gets told right","ap2 hm1"],["What happened was fair","nm2 mo1"],["I gave it everything","nk2 ty1"],["It was memorable, even if chaotic","er2 pn1"]]);
+n("A6","F1","What should people say about you?",[["They always showed up","ir2 hs1"],["Quick and clever","hm2 mo1"],["Never backed down","nk2 nm1"],["Never boring","er2 ty1"],["Made it feel like home","hs2 ap1"]]);
+// Path B: the Workshop
+n("B1","B2","A task is half done and nobody's watching. You:",[["Redo it until it's right","he2 at1"],["Finish it and move on","ar2 ch1"],["Write down how it works for others","at2 ac1"],["Test it on someone who needs it","ac2 he1"],["Think about how long it will last","ch2 ar1"]]);
+n("B2","B3","You spot a flaw in something you admire. You:",[["Fix it quietly","he2 ac1"],["Study why it happened","at2 ch1"],["Tell the creator","mo2 ap1"],["Learn from it for next time","ar2 at1"],["Make it beautiful anyway","ap2 he1"]]);
+n("B3","","Someone asks you to teach them. You:",[["Show them by doing","ar2 he1","B4a"],["Explain the principle first","at2 ch1","B4b"],["Turn it into a game","ap2 hm1","B4a"],["Ask what they actually need","ac2 hs1","B4b"],["Hand them a book and let them struggle","ch2 at1","B4b"]]);
+n("B4a","B5","Your hands are full and a new problem arrives. You:",[["Drop everything for it","ac2 nk1"],["Finish what's in hand first","he2 ar1"],["Hand it to someone else","at2 hm1"],["Patch it fast","hm2 ar1"],["Improvise","ty2 pn1"]]);
+n("B4b","B5","You have unlimited time. You:",[["Study one thing for years","ch2 at1"],["Master several crafts","ap2 he1"],["Tend a garden or a herd","ar2 hs1"],["Hunt for a cure to something old","ac2 ch1"],["Write it all down","at2 ap1"]]);
+n("B5","B6","What bothers you most?",[["Wasted talent","ap2 ac1"],["Shoddy work","he2 nm1"],["Rushed decisions","ch2 at1"],["Things left to rot","ar2 ac1"],["Ignorance by choice","at2 mo1"]]);
+n("B6","F1","The work is finished. You feel:",[["Already seeing what's wrong","he2 at1"],["Quietly proud","ar2 ap1"],["Relieved","ch1 hs1"],["Eager for the next one","ac2 nk1"],["Hopeful it outlasts you","ch2 he1"]]);
+// Path C: the Wilds
+n("C1","C2","You reach a fork in the trail. No map. You:",[["Take the one that feels right","pn2 ty1"],["Read the weather and the birds","nr2 ap1"],["Climb for a better view","ir2 nk1"],["Flip a coin","ty2 hm1"],["Take the less-traveled one","hm2 pn1"]]);
+n("C2","C3","A storm rolls in. You:",[["Run out to meet it","pn2 nk1"],["Shelter and wait","ar2 hs1"],["Work out where it's heading","nr2 ap1"],["Trust your luck","ty2 pn1"],["Wait for the rainbow after","ir2 hs1"]]);
+n("C3","","You come to a wide river. You:",[["Swim it","nr2 nk1","C4a"],["Find a place to cross","hm2 ar1","C4b"],["Follow it down to the sea","ir2 nr1","C4a"],["Camp and watch it a while","ar2 pn1","C4b"],["Rig a way across","at1 ar2","C4b"]]);
+n("C4a","C5","A creature speaks to you. You:",[["Listen. It may know something","nr2 ap1"],["Trade stories","hm2 pn1"],["Ask for a favor and learn the price","ty2 hm1"],["Make friends","pn2 hs1"],["Race it","nk2 pn1"]]);
+n("C4b","C5","A herd or a hive depends on you. You:",[["Tend it faithfully","ar2 hs1"],["Move it to better ground","pn1 ar2"],["Teach others how","ac2 ar1"],["Sing to it","pn2 ap1"],["Hand it off and wander","pn2 hm1"]]);
+n("C5","C6","Evening comes. You're:",[["Playing music by the fire","pn2 ap1"],["Telling tall tales","hm2 pn1"],["Watching the stars","ny2 nr1"],["Cooking for everyone","hs2 ar1"],["Out cold","hy2 pn1"]]);
+n("C6","F1","What do you take from the wild?",[["Freedom","pn2 ty1"],["Patience","ar2 nr1"],["The truth, as the tide tells it","nr2 mo1"],["A good story","hm2 ap1"],["A reason to keep going","nk2 ir1"]]);
+// Path D: the Night
+n("D1","D2","The world goes quiet. You:",[["Feel most awake","ny2 mp1"],["Drift toward sleep","hy2 mp1"],["Replay the day","ch2 mp1"],["Think about what ends and what stays","tn2 ch1"],["Keep a quiet watch","nm2 ny1"]]);
+n("D2","D3","A friend confesses something heavy. You:",[["Sit with them, no words","tn2 hy1"],["Ask what they've been dreaming","mp2 hy1"],["Tell them the hard truth","mo2 nm1"],["Keep it, no judgment","ny2 hs1"],["Help them set it right","nm2 nr1"]]);
+n("D3","","Someone tells you something hard to hear. You:",[["Thank them","tn2 nr1","D4a"],["Argue","mo2 er1","D4b"],["Go quiet and think","ny2 mp1","D4a"],["Remember it forever","ch2 nm1","D4b"],["Sleep on it","hy2 mp1","D4a"]]);
+n("D4a","D5","You wake from a vivid dream. You:",[["Write it down","mp2 ch1"],["Search it for meaning","nr2 mp1"],["Go back to sleep","hy2 mp1"],["Shrug it off","tn1 ny1"],["Wonder who was in it","mp2 ir1"]]);
+n("D4b","D5","Someone got away with something unfair. You:",[["Wait. It comes back around","nm2 tn1"],["Name it out loud","mo2 nm1"],["Make sure they know you know","ny2 nm1"],["Let it go","hy2 hs1"],["Let time handle it","ch2 tn1"]]);
+n("D5","D6","What scares you least?",[["The dark","ny2 hy1"],["Endings","tn2 ch1"],["Being disliked for the truth","mo2 nm1"],["Being forgotten","mp1 ch2"],["Being alone","ny2 hs1"]]);
+n("D6","F1","What do you hope the night gives you?",[["Rest","hy2 hs1"],["Answers","nr2 mp1"],["Justice, eventually","nm2 tn1"],["A good dream","mp2 hy1"],["Silence","ny2 tn1"]]);
+// Finale: everyone answers these
+n("F1","F2","You get one free afternoon. You:",[["Make something with your hands","he2 ar1"],["Meet up with people","hm2 hs1"],["Take a long walk","pn2 nr1"],["Nap","hy2 mp1"],["Go watch a match or contest","nk2 er1"]]);
+n("F2","F3","Pick a gift for a friend:",[["Something handmade","he2 ac1"],["A book or a map","at2 ch1"],["A good meal","hs2 ar1"],["A funny card","mo2 hm1"],["A ticket somewhere","hm2 ty1"]]);
+n("F3","F4","Your worst quality is:",[["Stubbornness","he1 nm2"],["Sarcasm","mo2 hm1"],["Escapism","hy2 mp1"],["Rashness","pn2 er1"],["Coldness","tn2 ny1"]]);
+n("F4","F5","The best compliment is:",[["Brilliant","at2 ap1"],["Fair","nm2 at1"],["Warm","hs2 ac1"],["Fearless","nk2 pn1"],["Lucky","ty2 hm1"]]);
+n("F5","F6","You can ask an oracle one thing:",[["How does it end?","tn2 ch1"],["What should I do next?","at2 nr1"],["Who can I trust?","nr2 ir1"],["Will it work?","ty2 ap1"],["Nothing. I'd rather not know","hy2 ny1"]]);
+n("F6","F7","Pick a color:",[["Gold","ap2 nk1"],["Deep sea blue","nr2 ir1"],["Black","ny2 tn1"],["Forest green","ar2 pn1"],["Ember red","he2 er1"]]);
+n("F7","F8","In an argument you:",[["Win with logic","at2 nm1"],["Use humor","mo2 hm1"],["Stir the pot","er2 mo1"],["Keep the peace","hs2 ir1"],["Walk out","ny2 hy1"]]);
+n("F8","F9","What would you most want to protect?",[["People who can't help themselves","ac2 hs1"],["Fair play","nm2 nk1"],["Time that matters","ch2 tn1"],["Wild places","pn2 ar1"],["Good stories","ap2 hm1"]]);
+n("F9","F10","Your relationship with luck:",[["Make your own","at2 nk1"],["Lean in","ty2 pn1"],["Notice the signs","nr2 mp1"],["Don't think about it","hy2 hs1"],["Test it","er2 hm1"]]);
+n("F10","","How should it end?",[["Quietly","tn2 hy1"],["With applause","nk2 ap1"],["With a bridge built","ir2 hs1"],["With the work lasting","he2 ch1"],["In a mystery","ny2 mp1"]]);
+const app=document.getElementById("app");let i=0,s={},path="",tb=0;
+const add=x=>x&&x.split(" ").forEach(p=>{s[p.slice(0,2)]=(s[p.slice(0,2)]||0)+ +p[2]});
+const rank=()=>Object.keys(G).sort((a,b)=>(s[b]||0)-(s[a]||0));
+function start(){i=0;s={};path="";tb=0;
+app.innerHTML='<h1>Which God Are You?</h1><p class="c t" style="margin-top:0">Deep Cuts Edition</p><p class="c mut">A branching quiz with '+Object.keys(G).length+' possible gods, mostly the ones the big names overshadow. Your first answer picks your path, and your later answers can fork it again. Two people can see very different questions.</p><button class="go" id="b">Begin</button>';
+document.getElementById("b").onclick=()=>show("R")}
+function show(id){if(!id)return finish();const q=N[id];
+app.innerHTML='<div class="bar"><i style="width:'+Math.min(i/17,1)*100+'%"></i></div><p class="mut">Question '+(i+1)+'</p><h2>'+q.t+'</h2>';
+q.o.forEach(o=>{const b=document.createElement("button");b.textContent=o[0];
+b.onclick=()=>{add(o[1]);if(o[3])path=o[3];i++;show(o[2]||q.nx)};app.appendChild(b)})}
+function finish(){const r=rank();
+if(!tb&&(s[r[0]]-s[r[1]])<=3){tb=1;
+app.innerHTML='<p class="mut">One last question</p><h2>Two or three voices are pulling at you. Which sounds most like you?</h2>';
+r.slice(0,3).forEach(k=>{const b=document.createElement("button");b.textContent=G[k][5].replace(/^./,c=>c.toUpperCase());b.onclick=()=>{s[k]+=3;done()};app.appendChild(b)})}
+else done()}
 function done(){
-const r=Object.keys(G).sort((a,b)=>(s[b]||0)-(s[a]||0)),t=r[0],g=G[t],mx=s[t]||1,sec=G[r[1]];
-let h='<h1>'+g[0]+'</h1><p class="c t" style="margin-top:0">'+g[1]+'</p><p>'+g[2]+'</p>'
+const r=rank(),t=r[0],g=G[t],mx=s[t]||1,sec=G[r[1]];
+let h='<h1>'+g[0]+'</h1><p class="c t" style="margin-top:0">'+g[1]+'</p><p>'+g[2]+'</p><p class="mut">You came in through the door of the '+path+'.</p>'
 +'<div class="sec"><p class="t">Divine Strengths</p><ul>'+g[3].map(x=>'<li>'+x+'</li>').join('')+'</ul></div>'
 +'<div class="sec"><p class="t">Fatal Flaw</p><p>'+g[4]+'</p></div>'
 +'<div class="sec"><p class="t">Your Secondary Pull</p><p><b>'+sec[0]+'</b>, '+sec[1].toLowerCase().replace(/^(god|goddess) of/,'$1 of')+'. You also carry '+sec[5]+', which is why you aren\'t a pure '+g[0]+'.</p></div>'
